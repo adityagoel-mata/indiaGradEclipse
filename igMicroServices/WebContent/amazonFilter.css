@@ -1,0 +1,28 @@
+.parameters {
+  display: table-cell;
+  border: solid 2px green;
+  background-color: grey;
+  width: 300px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: large;
+  line-height: 10px;
+  color: #eeeeee;
+  vertical-align: top;
+}
+.parameters #params {
+  border: solid 2px green;
+  padding-top: 0px;
+}
+
+#lookingFor-dropdown, #programme-dropdown, #field-dropdown, #degree-dropdown, #institute {
+  width: 200px;
+  border: solid 2px green;
+}
+
+#fees-range {
+  width: 195px;
+}
+select option[disabled] {
+  display: none;
+}
