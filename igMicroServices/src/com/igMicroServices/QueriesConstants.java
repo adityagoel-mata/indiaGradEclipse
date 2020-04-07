@@ -2,6 +2,9 @@ package com.igMicroServices;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class QueriesConstants {
 	
 	public String getInstituteQuery (String programme, String field ) {
@@ -63,4 +66,39 @@ public class QueriesConstants {
 			Query += "SELECT * FROM public.\"" + instiName.get(instiName.size()-1).trim() + "\" WHERE \"field\"= '" + field + "';";
 		return Query;
 	}
+
+	public String getDetailsQueryJA (JSONArray instiName, String sortType) throws JSONException {
+		 String sortText = "";
+	     if (sortType.equals("NIRF Overall Ranking")) sortText = "nirf";
+		 else if (sortType.equals("A-Z")) sortText = "\"instiName\"";
+		 else if (sortType.equals("Fees (Low to High)")) sortText = "fees";
+
+		String Query = "SELECT \"instiName\", fees, location, \"homeLink\", \"imageLocation\" FROM public.institutes WHERE ";
+		for (int i = 0; i<instiName.length()-1; i++) {
+			Query = Query.concat("\"instiName\" = '" + instiName.getJSONObject(i).getString("institute").trim() + "' OR ");
+		}
+		 	Query = Query.concat("\"instiName\" = '" + instiName.getJSONObject(instiName.length()-1).getString("institute").trim() + "' ORDER BY " + sortText + ";");
+		return Query;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

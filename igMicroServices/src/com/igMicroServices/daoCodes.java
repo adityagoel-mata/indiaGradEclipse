@@ -4,17 +4,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 
 public class daoCodes {
 	
 	Connection con = null;
 	QueriesConstants queryConstants = new QueriesConstants();
+	
+///////////////////////// Establish PostgreSQL Connection ////////////////////////////////////
 	public void connect() {
 		String url = "jdbc:postgresql://localhost:5432/igDemoDB";
 		String username = "postgres";
@@ -27,7 +33,8 @@ public class daoCodes {
 			System.out.println(ex);
 		}
 	}
-	
+
+///////////////////////// Fetches only institute Name ////////////////////////////////////////
 	public ArrayList<String> getInstitute(String programme, String field) {
 		try {
 			String Query = queryConstants.getInstituteQuery(programme, field);
@@ -45,6 +52,7 @@ public class daoCodes {
 		return null;
 	}
 	
+///////////////////////// Fetches Basic Details of the Institutes ////////////////////////////
 	public ArrayList getDetails(ArrayList<String> instituteName, String sortType) {
 		try {
 			System.out.println(instituteName);
@@ -79,7 +87,8 @@ public class daoCodes {
 		}
 		return null;
 	}
-	
+
+///////////////////////// Fetches in-depth details of the Institutes /////////////////////////
 	public ArrayList getAllDegree(ArrayList<String> instituteName, String field) {
 		try {
 			ArrayList allDegree = new ArrayList();
@@ -141,5 +150,38 @@ public class daoCodes {
 		}
 		return null;
 	}
+
+///////////////////////// Fetches Basic Details of the Institutes (v2-ongoing) ///////////////
+	public JSONArray getInstituteJA(String programme, String field) throws SQLException, JSONException {
+		
+			String Query = queryConstants.getInstituteQuery(programme, field);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(Query);
+			JSONArray institutesJA = new JSONArray();
+			ResultSetConverter rsc = new ResultSetConverter();
+			institutesJA = rsc.convert(rs);
+			System.out.println(institutesJA);
+			return institutesJA;
+		
+	}		
+
+///////////////////////// Fetches in-depth details of the Institutes (v2-ongoing) ////////////
+	public JSONArray getDetailsJA(JSONArray instituteName, String sortType) throws JSONException, SQLException {
+		
+			JSONArray DetailsJA = new JSONArray();
+			String Query = queryConstants.getDetailsQueryJA(instituteName, sortType);
+			System.out.println(Query);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(Query);
+			ResultSetConverter rsc = new ResultSetConverter();
+			DetailsJA = rsc.convert(rs);
+			System.out.println(DetailsJA);
+			return DetailsJA;		
+	}
+	
+	
+	
+
+
 }
 		

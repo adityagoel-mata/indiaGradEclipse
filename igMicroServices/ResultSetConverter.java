@@ -1,4 +1,4 @@
-package com.igMicroServices;
+package com.jdbc;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,10 +47,10 @@ public class ResultSetConverter {
          obj.put(column_name, rs.getInt(column_name));
         }
         else if(rsmd.getColumnType(i)==java.sql.Types.NVARCHAR){
-         obj.put(column_name, rs.getNString(column_name).trim());
+         obj.put(column_name, rs.getNString(column_name));
         }
         else if(rsmd.getColumnType(i)==java.sql.Types.VARCHAR){
-         obj.put(column_name, rs.getString(column_name).trim());
+         obj.put(column_name, rs.getString(column_name));
         }
         else if(rsmd.getColumnType(i)==java.sql.Types.TINYINT){
          obj.put(column_name, rs.getInt(column_name));
