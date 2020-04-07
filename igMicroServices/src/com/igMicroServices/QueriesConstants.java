@@ -7,19 +7,19 @@ public class QueriesConstants {
 	public String getInstituteQuery (String programme, String field ) {
 		String Query = "";
 		if (field.equals("All")) { 
-			Query = " SELECT DISTINCT institute FROM public.\"iitBombay\" WHERE programme= '" + programme + "' "
+			Query = " SELECT DISTINCT institute FROM public.\"IIT Bombay\" WHERE programme= '" + programme + "' "
 			+ "UNION "
-			+ "SELECT institute	FROM public.\"iitGandhinagar\" WHERE programme= '" + programme + "' "
+			+ "SELECT institute	FROM public.\"IIT Gandhinagar\" WHERE programme= '" + programme + "' "
 			+ "UNION "
-			+ "SELECT institute	FROM public.\"iitDelhi\" WHERE programme= '" + programme + "' "
+			+ "SELECT institute	FROM public.\"IIT Delhi\" WHERE programme= '" + programme + "' "
 			+ ";";
 			}
 		else {	
-			Query  = "SELECT institute FROM public.\"iitBombay\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
+			Query  = "SELECT institute FROM public.\"IIT Bombay\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
 			+ "UNION "
-			+ "SELECT institute FROM public.\"iitGandhinagar\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
+			+ "SELECT institute FROM public.\"IIT Gandhinagar\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
 			+ "UNION "
-			+ "SELECT institute FROM public.\"iitDelhi\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
+			+ "SELECT institute FROM public.\"IIT Delhi\" WHERE programme= '" + programme + "' AND field= '" + field + "' "
 			+ ";";
 		}
 	return Query;
@@ -46,11 +46,21 @@ public class QueriesConstants {
 		 else if (sortType.equals("A-Z")) sortText = "\"instiName\"";
 		 else if (sortType.equals("Fees (Low to High)")) sortText = "fees";
 
-		String Query = "SELECT \"instiName\", fees, description, \"homeLink\" FROM public.institutes WHERE ";
+		String Query = "SELECT \"instiName\", fees, location, \"homeLink\", \"imageLocation\" FROM public.institutes WHERE ";
 		for (int i = 0; i<instiName.size()-1; i++) {
-			Query = Query.concat("\"instiName\" = '" + instiName.get(i) + "' OR ");
+			Query = Query.concat("\"instiName\" = '" + instiName.get(i).trim() + "' OR ");
 		}
-		 	Query = Query.concat("\"instiName\" = '" + instiName.get(instiName.size()-1) + "' ORDER BY " + sortText + ";");
+		 	Query = Query.concat("\"instiName\" = '" + instiName.get(instiName.size()-1).trim() + "' ORDER BY " + sortText + ";");
+		return Query;
+	}
+	
+	public String getAllDegreeQuery (ArrayList<String> instiName, String field) {
+		String Query = "";
+		for (int i = 0; i<instiName.size()-1; i++) {
+			Query += "SELECT * FROM public.\"" + instiName.get(i).trim() + "\" WHERE \"field\"= '" + field + "' ";
+			Query += "UNION ";
+		}
+			Query += "SELECT * FROM public.\"" + instiName.get(instiName.size()-1).trim() + "\" WHERE \"field\"= '" + field + "';";
 		return Query;
 	}
 }

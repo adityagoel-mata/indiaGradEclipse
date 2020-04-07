@@ -3,6 +3,7 @@ package com.igMicroServices;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,14 +45,15 @@ public class daoCodes {
 		return null;
 	}
 	
-	public ArrayList getDetails(ArrayList<String> instituteName, String sortType){
+	public ArrayList getDetails(ArrayList<String> instituteName, String sortType) {
 		try {
 			System.out.println(instituteName);
 			ArrayList Details = new ArrayList();
 			ArrayList<String> instiName = new ArrayList<String>();
 			ArrayList<Integer> fees = new ArrayList<Integer>();
-			ArrayList<String> description = new ArrayList<String>();
+			ArrayList<String> location = new ArrayList<String>();
 			ArrayList<String> homeLink = new ArrayList<String>();
+			ArrayList<String> imageLink = new ArrayList<String>();
 			
 			String Query = queryConstants.getDetailsQuery(instituteName, sortType);
 			System.out.println(Query);
@@ -60,13 +62,15 @@ public class daoCodes {
 			while (rs.next()) {
 				instiName.add(rs.getString(1));
 				fees.add(rs.getInt(2));
-				description.add(rs.getString(3));
+				location.add(rs.getString(3));
 				homeLink.add(rs.getString(4));
+				imageLink.add(rs.getString(5));
 			}
 			Details.add(instiName);
 			Details.add(fees);
-			Details.add(description);
+			Details.add(location);
 			Details.add(homeLink);
+			Details.add(imageLink);
 			System.out.println(Details);
 			return Details;
 		}
@@ -76,5 +80,66 @@ public class daoCodes {
 		return null;
 	}
 	
-	
+	public ArrayList getAllDegree(ArrayList<String> instituteName, String field) {
+		try {
+			ArrayList allDegree = new ArrayList();
+			ArrayList degreeName = new ArrayList();
+			ArrayList degreeValue = new ArrayList();
+			
+			for (int i=0; i<instituteName.size(); i++) {
+				ArrayList nameNewArrays = new ArrayList();
+				degreeName.add(nameNewArrays);
+			}
+
+			for (int i=0; i<instituteName.size(); i++) {
+				ArrayList valueNewArrays = new ArrayList();
+				degreeValue.add(valueNewArrays);
+			}
+			System.out.println(degreeName);
+			System.out.println(degreeValue);
+			
+			String Query = queryConstants.getAllDegreeQuery(instituteName, field);
+			System.out.println(Query);
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(Query);
+			while (rs.next()) {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int numberOfColumns = rsmd.getColumnCount();
+				String rsInstituteName = rs.getString(1).trim();
+				
+				for (int i=0; i<instituteName.size(); i++) {
+					if (rsInstituteName.equals(instituteName.get(i).trim())) {
+						for (int j=5; j<=numberOfColumns; j++) {
+							((ArrayList) degreeName.get(i)).add(rsmd.getColumnName(j));
+							((ArrayList) degreeValue.get(i)).add(rs.getString(j));
+							
+						}
+					}
+				}
+			}
+			System.out.println(degreeName);
+			System.out.println(degreeValue);
+			for (int i=degreeName.size()-1; i>=0; i--) {
+				for (int j=((ArrayList) degreeName.get(i)).size()-1; j>=0; j--) {
+					if (((ArrayList) degreeValue.get(i)).get(j) == null) {
+						((ArrayList) degreeName.get(i)).remove(j);
+						((ArrayList) degreeValue.get(i)).remove(j);
+					}
+				}
+			}
+				
+			
+			System.out.println(degreeName);
+			System.out.println(degreeValue);
+			allDegree.add(degreeName);
+			allDegree.add(degreeValue);
+			return allDegree;
+		}
+		catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return null;
+	}
 }
+		

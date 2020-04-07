@@ -27,7 +27,7 @@ var Physics = document.getElementById("Physics");
 var Des = document.getElementById('Des');
 var Animation = document.getElementById('Animation');
 var IndD = document.getElementById('Industrial Design');
-var IntD = document.getElementById('Interactive Design');
+var IntD = document.getElementById('Interaction Design');
 var MVD = document.getElementById('Mobility Vehicle Design');
 var VC = document.getElementById('Visual Communication');
 

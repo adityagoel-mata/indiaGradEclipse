@@ -39,27 +39,20 @@
     <div class="resultOne">
       
       <div class="photo">
-        <img src="./iitgn1.jpg" class="dp">
+        <img src="${imageLink[loop.index]}" class="dp">
       </div>
       
       <div class="name">
         <p id= "name">
           <a href= "${homeLink[loop.index]}">${institutes}</a>
         </p>
-        <p id= "location">Gandhinagar, Gujarat</p>
+        <p id= "location">${location[loop.index]}</p>
   
         <p id = "available">
         
-<!--           <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Construction Technology and Management</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Geotech. and Geoenv. Engineering</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Transportation Engineering</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Construction Technology and Management</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Geotech. and Geoenv. Engineering</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Transportation Engineering</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Construction Technology and Management</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Geotech. andGeoenv. Engineering</span></button>
-          <button id="prog1"><span id="degree1">M.Tech</span> <span id="vBar">|</span><span id='field1'>Transportation Engineering</span></button>
- -->        
+        <c:forEach items="${degreeName[loop.index]}" var="degreeName" varStatus="count">
+          <button id="prog1"><span id="degree1">${degreeName}</span> <span id="vBar">|</span><span id='field1'>${degreeValue[loop.index][count.index]}</span></button>
+        </c:forEach>      
  		</p>
   
       </div>

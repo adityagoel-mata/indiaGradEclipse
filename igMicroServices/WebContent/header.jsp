@@ -37,7 +37,7 @@
             <div class="Des-dropdown">
               <button class="Des-field-button" id="Animation">Animation</button>
               <button class="Des-field-button" id="Industrial Design">Industrial Design</button>
-              <button class="Des-field-button" id="Interactive Design">Interactive Design</button>
+              <button class="Des-field-button" id="Interaction Design">Interaction Design</button>
               <button class="Des-field-button" id="Mobility Vehicle Design">Mobility Vehicle Design</button>
               <button class="Des-field-button" id="Visual Communication">Visual Communication</button>
             </div>

@@ -37,14 +37,22 @@ public class SortService extends HttpServlet {
 		
 		ArrayList<String> institutes = (ArrayList<String>) details.get(0);
 		ArrayList<Integer> fees = (ArrayList<Integer>) details.get(1);
-		ArrayList<String> description = (ArrayList<String>) details.get(2);
+		ArrayList<String> location = (ArrayList<String>) details.get(2);
 		ArrayList<String> homeLink = (ArrayList<String>) details.get(3);
+		ArrayList<String> imageLink = (ArrayList<String>) details.get(4);
+		ArrayList allDegree = dao.getAllDegree (institutes, field);
+		
+		ArrayList<String> degreeName = (ArrayList<String>) allDegree.get(0);
+		ArrayList<String> degreeValue = (ArrayList<String>) allDegree.get(1);
 		
 		request.setAttribute("institutes", institutes);
-		request.setAttribute("description", description);
+		request.setAttribute("location", location);
 		request.setAttribute("fees", fees);
 		request.setAttribute("homeLink", homeLink);
-		
+		request.setAttribute("imageLink", imageLink);
+		request.setAttribute("degreeName", degreeName);
+		request.setAttribute("degreeValue", degreeValue);
+			
 		RequestDispatcher rd = request.getRequestDispatcher("amazon.jsp");
 		rd.forward(request, response);
 
