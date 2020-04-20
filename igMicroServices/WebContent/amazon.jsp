@@ -14,7 +14,6 @@
 <%@ include file="amazonSearch.jsp" %>
 <%@ include file="footer.jsp" %>
 <!-- i am testing git ignore -->
-<!-- i am testing git ignore2 -->
 
 </body>
 </html>

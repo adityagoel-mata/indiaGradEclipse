@@ -11,7 +11,6 @@ import java.sql.ResultSetMetaData;
 
 public class ResultSetConverter {
 	// i am testing gitignore
-	// i am testing gitignore2
   public static JSONArray convert( ResultSet rs )
     throws SQLException, JSONException
   {
