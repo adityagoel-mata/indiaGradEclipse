@@ -21,6 +21,10 @@ public class daoCodes {
 	QueriesConstants queryConstants = new QueriesConstants();
 	
 ///////////////////////// Establish PostgreSQL Connection ////////////////////////////////////
+
+	// i am testing git ignore.
+	
+	
 	public void connect() {
 		String url = "jdbc:postgresql://localhost:5432/igDemoDB";
 		String username = "postgres";
