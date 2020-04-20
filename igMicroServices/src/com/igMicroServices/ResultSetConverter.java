@@ -10,8 +10,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
 public class ResultSetConverter {
-	// i am testing gitignore
-  public static JSONArray convert( ResultSet rs )
+
+	//test gitignore5	
+
+	public static JSONArray convert( ResultSet rs )
     throws SQLException, JSONException
   {
     JSONArray json = new JSONArray();

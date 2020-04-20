@@ -22,8 +22,7 @@ public class daoCodes {
 	
 ///////////////////////// Establish PostgreSQL Connection ////////////////////////////////////
 
-	// i am testing git ignore.
-	
+//test gitignore5	
 	
 	public void connect() {
 		String url = "jdbc:postgresql://localhost:5432/igDemoDB";
