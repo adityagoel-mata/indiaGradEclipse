@@ -89,6 +89,7 @@ public class daoCodes {
 	}
 
 ///////////////////////// Fetches in-depth details of the Institutes /////////////////////////
+	
 	public ArrayList getAllDegree(ArrayList<String> instituteName, String field) {
 		try {
 			ArrayList allDegree = new ArrayList();

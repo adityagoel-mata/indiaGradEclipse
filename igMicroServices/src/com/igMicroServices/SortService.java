@@ -39,6 +39,7 @@ public class SortService extends HttpServlet {
 		try {
 			JSONArray instiNamesJA = dao.getInstituteJA(programme, field);
 			JSONArray detailsJA = dao.getDetailsJA(instiNamesJA, sortType);
+					    
 		} 
 		catch (SQLException e) {e.printStackTrace();} 
 		catch (JSONException e) {e.printStackTrace();}
